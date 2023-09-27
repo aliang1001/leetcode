@@ -7,7 +7,6 @@ var search = function (nums, target) {
   let left = 0;
   let right = nums.length - 1;
   while (left <= right) {
-    debugger;
     let middle = (left + right) >> 1;
     let value = nums[middle];
     if (target > value) {
