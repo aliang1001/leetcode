@@ -26,7 +26,6 @@ const solution = (nums) => {
     }
     result.unshift(leftValue > rightValue ? leftValue : rightValue);
   }
-  console.log(result);
   return result;
 };
 solution(nums);
