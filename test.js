@@ -1,35 +1,59 @@
-// 26. 删除有序数组中的重复项
-// 给你一个 非严格递增排列 的数组 nums ，请你 原地 删除重复出现的元素，使每个元素 只出现一次 ，返回删除后数组的新长度。元素的 相对顺序 应该保持 一致 。然后返回 nums 中唯一元素的个数。
+// 输入：nums = [3,2,2,3], val = 3
+// 输出：2, nums = [2,2]
+// 解释：函数应该返回新的长度 2, 并且 nums 中的前两个元素均为 2。你不需要考虑数组中超出新长度后面的元素。例如，函数返回的新长度为 2 ，而 nums = [2,2,3,3] 或 nums = [2,2,0,0]，也会被视作正确答案。
 
-// 考虑 nums 的唯一元素的数量为 k ，你需要做以下事情确保你的题解可以被通过：
+// 提醒：不能单独删除数组中的某个元素，只能覆盖。
 
-// 更改数组 nums ，使 nums 的前 k 个元素包含唯一元素，并按照它们最初在 nums 中出现的顺序排列。nums 的其余元素与 nums 的大小不重要。
-// 返回 k 。
+// // 1. 暴力解法
+// var removeElement = function (nums, val) {
+//   const size = nums.length;
+//   let count = 0;
+//   for (let i = 0; i < size; i++) {
+//     const value = nums[i];
+//     if (value == val) {
+//       for (let j = i; j < size; j++) {
+//         nums[j] = nums[j + 1];
+//       }
+//       i--;
+//       count += 1;
+//     }
+//   }
+//   return size - count;
+// };
 
-// 示例 1：
+// //双指针
+// var removeElement = (nums, val) => {
+//   const size = nums.length;
+//   let slow = 0; // 慢指针
+//   for (let quick = 0; quick < size; quick++) {
+//     const value = nums[quick];
+//     // 如果没找到剔除的元素，则慢与快指针同步
+//     // 如果找到元素，则慢指针等待覆盖后面的元素
+//     if (value !== val) {
+//       if (slow !== quick) {
+//         //不能是要剔除的元素，所以要判断
+//         nums[slow] = nums[quick];
+//       }
+//       slow++;
+//     }
+//   }
+//   return slow;
+// };
 
-// 输入：nums = [1,1,2]
-// 输出：2, nums = [1,2,_]
-// 解释：函数应该返回新的长度 2 ，并且原数组 nums 的前两个元素被修改为 1, 2 。不需要考虑数组中超出新长度后面的元素。
-// 示例 2：
-
-// 输入：nums = [0,0,1,1,1,2,2,3,3,4]
-// 输出：5, nums = [0,1,2,3,4]
-// 解释：函数应该返回新的长度 5 ， 并且原数组 nums 的前五个元素被修改为 0, 1, 2, 3, 4 。不需要考虑数组中超出新长度后面的元素。
-
-/**
- * @param {number[]} nums
- * @return {number}
- */
-var removeDuplicates = function (nums) {
-  let slow = 0;
-  let quick = 0;
-  while (quick < nums.length) {
-    if (nums[slow] !== nums[quick]) {
-      nums[++slow] = nums[quick];
+//双指针
+var removeElement = (nums, val) => {
+  const size = nums.length;
+  let slow = 0; // 慢指针
+  for (let quick = 0; quick < size; quick++) {
+    if (nums[quick] !== val) {
+      nums[slow++] = nums[quick];
     }
-    quick++;
   }
-  return slow + 1;
+  return slow;
 };
-console.log(removeDuplicates([0, 0, 1, 1, 1, 2, 2, 3, 3, 4]));
+
+const nums = [0, 1, 2, 2, 3, 0, 4, 2];
+const val = 2;
+
+const result = removeElement(nums, val);
+console.log(result);

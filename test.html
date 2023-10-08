@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    h1 {
+      width: 100px;
+      background: pink;
+      overflow-wrap:break-word;
+      border:1px solid;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>12345678910</h1>
+</body>
+  <script>
+    const element = document.getElementsByTagName('h1')
+    const textContent = element.innerHTML;
+    const nodeList = [...textContent].map(text=> <span>{text}</span>);
+    console.log(nodeList)
+  </script>
+</html>
