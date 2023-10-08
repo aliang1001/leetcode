@@ -23,13 +23,12 @@
  */
 var removeDuplicates = function (nums) {
   let slow = 0;
-  let quick = 0;
+  let quick = 1;
   while (quick < nums.length) {
-    if (nums[slow] !== nums[quick]) {
+    if (nums[quick] !== nums[slow]) {
       nums[++slow] = nums[quick];
     }
     quick++;
   }
   return slow + 1;
 };
-console.log(removeDuplicates([0, 0, 1, 1, 1, 2, 2, 3, 3, 4]));
