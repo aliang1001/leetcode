@@ -11,5 +11,21 @@
  * @param {number[]} arr
  * @return {boolean}
  */
-var validMountainArray = function (arr) {};
-console.log(validMountainArray());
+var validMountainArray = function (arr) {
+  if (arr.length < 3) {
+    return false;
+  }
+  let left = 0;
+  let right = arr.length - 1;
+  while (arr[left] < arr[left + 1]) {
+    left++;
+  }
+  while (arr[right] < arr[right - 1]) {
+    right--;
+  }
+  if (left === right && left !== 0 && right !== arr.length - 1) {
+    return true;
+  }
+  return false;
+};
+console.log(validMountainArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]));

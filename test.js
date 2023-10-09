@@ -41,19 +41,5 @@
 // };
 
 //双指针
-var removeElement = (nums, val) => {
-  const size = nums.length;
-  let slow = 0; // 慢指针
-  for (let quick = 0; quick < size; quick++) {
-    if (nums[quick] !== val) {
-      nums[slow++] = nums[quick];
-    }
-  }
-  return slow;
-};
-
-const nums = [0, 1, 2, 2, 3, 0, 4, 2];
-const val = 2;
-
-const result = removeElement(nums, val);
-console.log(result);
+const count = new Array(2002).fill(0);
+console.log(count);
