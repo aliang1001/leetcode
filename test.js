@@ -1,45 +1,60 @@
-// 输入：nums = [3,2,2,3], val = 3
-// 输出：2, nums = [2,2]
-// 解释：函数应该返回新的长度 2, 并且 nums 中的前两个元素均为 2。你不需要考虑数组中超出新长度后面的元素。例如，函数返回的新长度为 2 ，而 nums = [2,2,3,3] 或 nums = [2,2,0,0]，也会被视作正确答案。
+// 给你一个链表的头节点 head 和一个整数 val ，请你删除链表中所有满足 Node.val == val 的节点，并返回 新的头节点
 
-// 提醒：不能单独删除数组中的某个元素，只能覆盖。
+function createLinkedList(arr) {
+  // 定义链表节点的构造函数
+  function ListNode(val) {
+    this.val = val;
+    this.next = null;
+  }
 
-// // 1. 暴力解法
-// var removeElement = function (nums, val) {
-//   const size = nums.length;
-//   let count = 0;
-//   for (let i = 0; i < size; i++) {
-//     const value = nums[i];
-//     if (value == val) {
-//       for (let j = i; j < size; j++) {
-//         nums[j] = nums[j + 1];
-//       }
-//       i--;
-//       count += 1;
-//     }
-//   }
-//   return size - count;
-// };
+  // 边界情况处理，如果输入为空数组，则返回空链表
+  if (arr.length === 0) {
+    return null;
+  }
 
-// //双指针
-// var removeElement = (nums, val) => {
-//   const size = nums.length;
-//   let slow = 0; // 慢指针
-//   for (let quick = 0; quick < size; quick++) {
-//     const value = nums[quick];
-//     // 如果没找到剔除的元素，则慢与快指针同步
-//     // 如果找到元素，则慢指针等待覆盖后面的元素
-//     if (value !== val) {
-//       if (slow !== quick) {
-//         //不能是要剔除的元素，所以要判断
-//         nums[slow] = nums[quick];
-//       }
-//       slow++;
-//     }
-//   }
-//   return slow;
-// };
+  // 创建链表的头节点
+  let head = new ListNode(arr[0]);
+  let current = head;
 
-//双指针
-const count = new Array(2002).fill(0);
-console.log(count);
+  // 循环遍历数组，创建链表节点并连接起来
+  for (let i = 1; i < arr.length; i++) {
+    let newNode = new ListNode(arr[i]);
+    current.next = newNode;
+    current = newNode;
+  }
+
+  return head;
+}
+
+let list = {
+  value: 1,
+  next: {
+    value: 2,
+    next: {
+      value: 3,
+      next: {
+        value: 4,
+        next: null,
+      },
+    },
+  },
+};
+
+var reverse = function (pre, head) {
+  if (!head) return pre;
+  const temp = head.next;
+  head.next = pre;
+  pre = head;
+  return reverse(pre, temp);
+};
+
+var reverseList = function (head) {
+  return reverse(null, head);
+};
+
+let list1 = {
+  value: 1,
+  next: null,
+};
+
+reverseList(list1);
