@@ -19,4 +19,3 @@ var getDecimalValue = function (head) {
   return sum;
 };
 var result = getDecimalValue([1, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0]);
-debugger;
