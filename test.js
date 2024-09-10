@@ -185,25 +185,25 @@ var letterCombinations = function (digits) {
 
 
 
-let candidates = [1,1,2,5,6,7]
+let candidates = [1, 1, 2, 5, 6, 7]
 let target = 8;
 
-function sum(candidates,target){
+function sum(candidates, target) {
   let result = [];
   let sortList = candidates;
-  function helper(idx,list=[]){
-    let sum = list.reduce((prev,cur)=> prev+cur,0);
-    if(sum>=target){
-      if(sum === target){
+  function helper(idx, list = []) {
+    let sum = list.reduce((prev, cur) => prev + cur, 0);
+    if (sum >= target) {
+      if (sum === target) {
         result.push(list)
       }
-      return 
+      return
     }
-    for(let i = idx; i < sortList.length; i++){
-      if(i > idx&&sortList[i-1]=== sortList[i]){
+    for (let i = idx; i < sortList.length; i++) {
+      if (i > idx && sortList[i - 1] === sortList[i]) {
         continue
       } else {
-        helper(i+1,[...list,sortList[i]]);
+        helper(i + 1, [...list, sortList[i]]);
       }
     }
   };
@@ -215,29 +215,29 @@ function sum(candidates,target){
  * @param {string} s
  * @return {string[][]}
  */
-var partition = function(s) {
+var partition = function (s) {
   let result = [];
-  function helper(idx,path=[]){
-    let length = path.reduce((prev,cur)=>{
+  function helper(idx, path = []) {
+    let length = path.reduce((prev, cur) => {
       prev.push(...cur);
       return prev
-    },[]).length;
-    if(length === s.length){
+    }, []).length;
+    if (length === s.length) {
       result.push(path)
     };
-    for(let i = idx; i < s.length; i++){
-      let val = i > idx? s.slice(idx,i+1): s[idx];
-      if(isPalindrome(val)){
-        helper(i+1,[...path,val]);
-      } 
+    for (let i = idx; i < s.length; i++) {
+      let val = i > idx ? s.slice(idx, i + 1) : s[idx];
+      if (isPalindrome(val)) {
+        helper(i + 1, [...path, val]);
+      }
     }
   }
   helper(0);
   return result
 };
 
-var isPalindrome = function(x) {
-  if ( x < 0 ) return false
+var isPalindrome = function (x) {
+  if (x < 0) return false
   let str = '' + x
   return Array.from(str).reverse().join('') === str
 };
@@ -248,35 +248,35 @@ var isPalindrome = function(x) {
  * 复原IP
  * @param {*} s 
  */
-var restoreIpAddresses = function(s) {
+var restoreIpAddresses = function (s) {
   let list = [];
-  function helper(idx,path=[]){
-    if(path.length > 3){
-      if(s.length === idx){
+  function helper(idx, path = []) {
+    if (path.length > 3) {
+      if (s.length === idx) {
         list.push(path);
       }
-      return 
+      return
     }
-    for(let i = idx; i < s.length; i++){
+    for (let i = idx; i < s.length; i++) {
       /**
        * 切割条件
        * 1. 小于256;
        * 2. 数字如果超过 1 位数则第一位不能是0
        */
-      let value = i > idx ? s.slice(idx,i+1):s[i];
-      if(Number(value) < 256){
-        if(value.length > 1){
-          if(Number(value[0])){
-            helper(i+1,[...path,value])
+      let value = i > idx ? s.slice(idx, i + 1) : s[i];
+      if (Number(value) < 256) {
+        if (value.length > 1) {
+          if (Number(value[0])) {
+            helper(i + 1, [...path, value])
           }
         } else {
-          helper(i+1,[...path,value])
+          helper(i + 1, [...path, value])
         }
       }
     }
   };
   helper(0);
-  return list.map(item=>item.join('.'))
+  return list.map(item => item.join('.'))
 };
 let s = '0000'
 
@@ -286,11 +286,11 @@ let s = '0000'
  * @return {number[][]}
  */
 // [1,2,3] 
-var subsets = function(nums) {
+var subsets = function (nums) {
   let result = [];
-  for(val of nums){
-    for(let newVal of [...result]){
-      result.push([...newVal,val]);
+  for (val of nums) {
+    for (let newVal of [...result]) {
+      result.push([...newVal, val]);
     }
     result.push([val]);
   };
@@ -304,23 +304,23 @@ var subsets = function(nums) {
  * @param {number[]} nums
  * @return {number[][]}
  */
-var subsets1 = function(nums) {
+var subsets1 = function (nums) {
   let result = [];
-  let list = nums.sort((a,b)=> b-a);
-   function helper(idx,path=[]){
-    for(let i = idx; i < list.length; i++){
-      if(i !== idx && list[i] === list[i-1]){
+  let list = nums.sort((a, b) => b - a);
+  function helper(idx, path = []) {
+    for (let i = idx; i < list.length; i++) {
+      if (i !== idx && list[i] === list[i - 1]) {
         continue
       } else {
-        result.push([...path,list[i]]);
-        helper(i+1,[...path,list[i]]);
+        result.push([...path, list[i]]);
+        helper(i + 1, [...path, list[i]]);
       }
     }
-   };
-   helper(0);
-   result.push([])
-   return result
- };
+  };
+  helper(0);
+  result.push([])
+  return result
+};
 // console.log(subsets1([4,4,4,1,4]));
 
 /**
@@ -336,26 +336,26 @@ var subsets1 = function(nums) {
 输出：[[4,4]]
 
  */
-var findSubsequences = function(nums) {
+var findSubsequences = function (nums) {
   let result = [];
   let set = new Set();
-  function helper(idx,path=[]){
-    if(path.length > 1){
-      if(path[path.length -1 ] >= path[path.length-2]){
+  function helper(idx, path = []) {
+    if (path.length > 1) {
+      if (path[path.length - 1] >= path[path.length - 2]) {
         let key = path.join(',');
         if (!set.has(key)) {
           result.push([...path]);
           set.add(key);
         }
       } else {
-        return 
+        return
       }
     }
-    for(let i = idx; i < nums.length;i++){
-      if(i !== idx && nums[i-1] === nums[i]){
+    for (let i = idx; i < nums.length; i++) {
+      if (i !== idx && nums[i - 1] === nums[i]) {
         continue
       } else {
-        helper(i+1,[...path,nums[i]]);
+        helper(i + 1, [...path, nums[i]]);
       }
     }
   };
@@ -380,7 +380,7 @@ var findSubsequences = function (nums) {
       if (i !== idx && nums[i - 1] === nums[i]) {
         continue
       } else {
-        if(path.length === 0 || nums[i] >= path[path.length - 1]){
+        if (path.length === 0 || nums[i] >= path[path.length - 1]) {
           helper(i + 1, [...path, nums[i]]);
         }
       }
@@ -403,20 +403,20 @@ var findSubsequences = function (nums) {
 function permute(nums) {
   const result = [];
   function helper(idx) {
-    if(idx === nums.length -1){
+    if (idx === nums.length - 1) {
       result.push([...nums]);
-      return 
+      return
     };
     let set = new Set();
-    for(let i = idx; i < nums.length;i++){
-      if(set.has(nums[i])){
+    for (let i = idx; i < nums.length; i++) {
+      if (set.has(nums[i])) {
         continue
       } else {
         set.add(nums[i])
       }
-      [nums[i], nums[idx]] = [nums[idx], nums[i]]; 
-      helper(idx+1);
-      [nums[i], nums[idx]] = [nums[idx], nums[i]]; 
+      [nums[i], nums[idx]] = [nums[idx], nums[i]];
+      helper(idx + 1);
+      [nums[i], nums[idx]] = [nums[idx], nums[i]];
     };
   }
   helper(0);
@@ -424,7 +424,140 @@ function permute(nums) {
 }
 
 
+/**
+ * @param {string[][]} tickets
+ * @return {string[]}
+ * 1. 串针引线
+ * 2. 获取最小路程
+ */
+// var findItinerary = function(tickets) {
+//   /**
+//    * 1. 先对起点=>终点进行归纳，对应关系
+//    * 2. 然后用链表引针穿线
+//    * 3. 遍历的路线就是最小路程
+//    */
+//   let result = [];
+//   let groupMap = tickets.reduce((prev,cur)=>{
+//     const [start,end] = cur;
+//     if(!prev[start]){
+//       prev[start] = [];
+//     };
+//     prev[start].push(end);
+//     prev[start].sort()
+//     return prev;
+//   },{});
+//   function helper(city,path=[]){
+//     if(!groupMap[city]?.length){
+//       if(path.length === tickets.length){
+//         result.push(path)
+//       }
+//       return 
+//     }
+//     for(let i = 0; i < groupMap[city].length;i++){
+//       if(!result.length){
+//         let nextCity = groupMap[city][i];
+//         groupMap[city].splice(i, 1); // 删除这一项
+//         helper(nextCity,[...path,nextCity]);
+//         groupMap[city].splice(i, 0, nextCity);
+//       }
+//     }
+//   }
+//   helper('JFK');
+//   return ['JFK',...result[0]]
+// };
 
-const nums = [3,1, 2, 1];
-console.log(permute(nums));
+var findItinerary = function (tickets) {
+  let result = [];
+  let groupMap = tickets.reduce((prev, cur) => {
+    const [start, end] = cur;
+    if (!prev[start]) {
+      prev[start] = [];
+    };
+    prev[start].push(end);
+    prev[start].sort()
+    return prev;
+  }, {});
+  function helper(node) {
+    for (let i = 0; i < groupMap[node]?.length; i++) {
+      let nextNode = groupMap[node].shift();
+      helper(nextNode);
+    };
+    result.push(node)
+  }
+  helper('JFK');
+  return result.reverse()
+};
+let tickets = [["JFK", "SFO"], ["JFK", "ATL"], ["SFO", "ATL"], ["ATL", "JFK"], ["ATL", "SFO"]]
 
+
+/**
+ * @param {number} n
+ * @return {string[][]}
+ */
+var solveNQueens = function (n) {
+  let list = getList(n);
+  let row = new Set(); // 行
+  let col = new Set(); // 列
+  let pie = new Set(); // 斜角线
+  let na =  new Set(); // 对角线
+  let result = [];
+
+  helper(0);
+  return result
+
+  function helper(colIdx){
+    if(colIdx === n){
+      getResult()
+      return 
+    }
+
+    for(let i = 0; i < n; i++){
+      if(row.has(colIdx)||col.has(i)||pie.has(colIdx - i)||na.has(colIdx+i)){
+        continue
+      } else {
+        list[colIdx][i] = true;
+        row.add(colIdx);
+        col.add(i);
+        pie.add(colIdx - i);
+        na.add(colIdx+i);
+  
+        helper(colIdx+1);
+        list[colIdx][i] = false;
+        row.delete(colIdx);
+        col.delete(i);
+        pie.delete(colIdx - i);
+        na.delete(colIdx+i);
+      }
+    }
+  };
+
+  function getResult(){
+    let resultItem = [];
+    for(let i = 0; i < n;i++){
+      let item = [];
+      for(let j = 0; j < n; j++){
+        if(list[i][j]){
+          item.push('Q')
+        } else {
+          item.push('.')
+        };
+      }
+      resultItem.push(item.join(''))
+    }
+    result.push(resultItem)
+  };
+
+  function getList(n) {
+    let list = [];
+    for (let i = 0; i < n; i++) {
+      let item = [];
+      for (let j = 0; j < n; j++) {
+        item.push(false)
+      }
+      list.push(item);
+    };
+    return list
+  };
+};
+
+console.log(solveNQueens(4))
